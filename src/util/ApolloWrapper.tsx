@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
 import {
   ApolloClient,
   ApolloProvider,
   HttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { useAuth0 } from "./Auth";
 import { setContext } from "@apollo/client/link/context";
 import { createUploadLink } from "apollo-upload-client";
+import React, { useEffect, useState } from "react";
+import { useAuth0 } from "./Auth";
 function ApolloWrapper({ children }: { children: any }) {
   const { isAuthenticated, getTokenSilently } = useAuth0();
   const cache = new InMemoryCache();
@@ -31,10 +31,10 @@ function ApolloWrapper({ children }: { children: any }) {
   });
   /* Create Apollo Client */
   const httpLink = new HttpLink({
-    uri: "http://localhost:5000/graphql",
+    uri: process.env.REACT_APP_BASE_URL,
   });
   const httpUploadLink = createUploadLink({
-    uri: "http://localhost:5000/graphql",
+    uri: process.env.REACT_APP_BASE_URL,
   });
   const client = new ApolloClient({
     link: authLink.concat(httpUploadLink),

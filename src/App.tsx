@@ -1,23 +1,22 @@
+import { useQuery } from "@apollo/client";
 import React, { Suspense, useEffect, useState } from "react";
-
-import "./App.css";
-import LoginButton from "./components/LoginButton";
-import * as RouteComponents from "./util/RouteComponents";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router";
-import { useAuth0 } from "./util/Auth";
+import { IS_AUTHENTICATED } from "./api/Graphql/Queries";
+import "./App.css";
 // import { Typography } from "@material-ui/core";
 import Dashboard from "./components/Dashboard";
+import LoadingSpinner from "./components/LoadingSpinner";
+import LoginButton from "./components/LoginButton";
 import Navbar from "./components/Navbar";
-import { useQuery } from "@apollo/client";
-import { IS_AUTHENTICATED } from "./api/Graphql/Queries";
-import { useDispatch } from "react-redux";
+import { setIsLoading } from "./store/actions/loading";
 import { getPermissions } from "./store/actions/user";
+import { useAuth0 } from "./util/Auth";
 import {
   getPermissionRoutes,
   getPermissionSubRoutes,
 } from "./util/getPermissionRoutes";
-import { setIsLoading } from "./store/actions/loading";
-import LoadingSpinner from "./components/LoadingSpinner";
+import * as RouteComponents from "./util/RouteComponents";
 
 // import { getPermissions } from "./store/actions/user";
 function App() {
@@ -55,6 +54,7 @@ function App() {
     // eslint-disable-next-line
   }, [authLoading, loading]);
   console.log(subPermissionRoutes);
+  console.log(window.location.pathname);
 
   return (
     <div className="App">

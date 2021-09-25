@@ -1,16 +1,14 @@
+import { ThemeProvider } from "@material-ui/core";
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App";
+import "./index.css";
 import store from "./store/store";
-import { Auth0Provider } from "./util/Auth";
-
-import ApolloWrapper from "./util/ApolloWrapper";
-import { ThemeProvider } from "@material-ui/core";
 import defaultTheme from "./styles/standardtheme";
+import ApolloWrapper from "./util/ApolloWrapper";
+import { Auth0Provider } from "./util/Auth";
 
 /* Set up local cache */
 
@@ -20,7 +18,7 @@ ReactDOM.render(
       domain={process.env.REACT_APP_AUTH0_DOMAIN!}
       client_id={process.env.REACT_APP_AUTH0_CLIENT_ID!}
       audience={process.env.REACT_APP_AUTH0_AUDIENCE!}
-      redirect_uri={window.location.origin}
+      redirect_uri={process.env.REACT_APP_MAIN_URL!}
     >
       <Provider store={store}>
         <ApolloWrapper>

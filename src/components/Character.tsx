@@ -189,7 +189,7 @@ const Character = () => {
             <Pagination
               color="primary"
               page={page}
-              onChange={handlePagination}
+              onChange={(ev: any, page) => handlePagination(ev, page)}
               count={Math.ceil(data.getCharacters.total / 10)}
             />
           </div>
@@ -201,7 +201,7 @@ const Character = () => {
         <Grid container>
           {new Array(10).fill("").map((el) => {
             <Grid item xs={12} sm={4}>
-              <Skeleton variant="rectangular" width={300} height={300} />;
+              <Skeleton variant="rect" width={300} height={300} />;
             </Grid>;
           })}
         </Grid>
@@ -227,7 +227,6 @@ const Character = () => {
         handleImageAddition={handleImageAddition}
         handleImageRemoval={handleImageDeletion}
       />
-      )
     </React.Fragment>
   );
 };
